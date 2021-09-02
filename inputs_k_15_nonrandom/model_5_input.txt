@@ -1,0 +1,15 @@
+Input = 27, output = 501
+Input = 13, output = 249
+Input = 63, output = 1149
+Input = 4, output = 87
+Input = 50, output = 915
+Input = 56, output = 1023
+Input = 78, output = 1419
+Input = 98, output = 1779
+Input = 99, output = 1797
+Input = 1, output = 33
+Input = 90, output = 1635
+Input = 58, output = 1059
+Input = 35, output = 645
+Input = 93, output = 1689
+Input = 30, output = 555
