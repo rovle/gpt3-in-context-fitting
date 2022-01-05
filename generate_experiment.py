@@ -57,7 +57,16 @@ def generate_regression_experiment(name, preamble, function,
     with open('experiments_log.json', 'w') as file:
         json.dump(experiments, file)
 
-def generate_classification_experiment(name, premable, class_generators)
+def generate_classification_experiment(name, premable, class_generators,
+                                        num_train, num_test):
+    """
+    class_generators: dict
+        Keys are taken to be ['class_1', 'class_2', ...], a values are objects
+        which have rvs method implemented on them, which can be used to sample
+        from those classes.
+        
+    """
+    pass
 
 
 if __name__=='__main__':
