@@ -15,13 +15,11 @@ transformed = np.vectorize(round)(transformed)
 y = iris.target
 
 x_train, x_test, y_train, y_test = train_test_split(transformed, y,
-                                    test_size=0.5, stratify=y)
+                                    test_size=0.5, stratify=y, random_state=42)
 
 
 # Set up the input
-input_template = ('This is a sequence of inputs and outputs'
-                ' of a statistical model which takes four integers'
-                ' returns one of the 0, 1, 2.\n')
+input_template = ''
 for x, y in zip(x_train, y_train):
     x = ', '.join(map(str, x))
     y = str(y)
