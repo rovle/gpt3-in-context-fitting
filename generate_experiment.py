@@ -22,18 +22,27 @@ if __name__=='__main__':
     classes = [0, 1]
     def sampling_fn(class_num, size):
         if class_num == 0:
-            return multivariate_normal.rvs(mean=[50, 40],
+            sample = multivariate_normal.rvs(mean=[50, 40],
                                             cov=[[160, 0], [0, 80]], 
                                             size=size)
+            round_vec = np.vectorize(round)
+            sample = round_vec(sample)
+            return [tuple(x) for x in sample]
+    
         if class_num == 1:
-            return multivariate_normal.rvs(mean=[50, 60],
-                                            cov=[[80, 0], [0, 160]], 
+            sample = multivariate_normal.rvs(mean=[50, 60],
+                                            cov=[[80, 0], [0, 160]],
                                             size=size)
-
-    generate_classification_experiment(name=name,
+            round_vec = np.vectorize(round)
+            sample = round_vec(sample)
+            return [tuple(x) for x in sample]
+    
+    generate_classification_experiment(
+                                    experiments_dict=experiments,
+                                    name=name,
                                     preamble=preamble,
                                     sampling_fn=sampling_fn,
                                     num_train=50,
                                     num_test=30,
-                                    classes=[0,1])
-           
+                                    classes=[0,1]
+                                    )

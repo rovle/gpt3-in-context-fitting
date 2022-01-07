@@ -2,7 +2,7 @@ import json
 
 engines = ['ada', 'babbage', 'curie', 'davinci']
 for engine in engines:
-    with open('iris_results.json', 'r') as file:
+    with open('iris_results/basic experiment, no preamble, input-output terminology, random_state 88.json', 'r') as file:
         results = json.loads(file.read())
 
     accurate = [1 if x==y else 0
