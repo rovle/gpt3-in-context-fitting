@@ -18,14 +18,14 @@ transformed = np.vectorize(round)(transformed)
 y = iris.target
 
 x_train, x_test, y_train, y_test = train_test_split(transformed, y,
-                                    test_size=0.5, stratify=y, random_state=88)
+                                    test_size=0.5, stratify=y, random_state=97)
 
 
 input_template = ''
 for x, y in zip(x_train, y_train):
     x = ', '.join(map(str, x))
     y = str(y)
-    input_template += f'Input: {x}, output = {y}\n'
+    input_template += f'Input = {x}, output = {y}\n'
 
 results = dict()
 results['input_template'] = input_template
@@ -44,15 +44,16 @@ for engine in engines:
     results[engine]['gpt_output_raw'] = []
     results[engine]['gpt_classification'] = []
 
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 for engine in engines:
     for x in x_test:
         input = ', '.join(map(str, x))
         input_text = (input_template +
-                        f'Input: {input}, output ='
+                        f'Input = {input}, output ='
                         )
         response = openai.Completion.create(engine=engine,
-                            prompt=input_text, max_tokens=2,
+                            prompt=input_text, max_tokens=4,
                             temperature=0, top_p=0)
         response_text = response['choices'][0]['text']
         results[engine]['gpt_output_raw'].append(response_text)
