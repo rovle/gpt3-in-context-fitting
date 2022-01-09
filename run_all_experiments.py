@@ -3,51 +3,52 @@ import openai
 import re
 import os
 from utils import textify_numbers
+import argparse
 
 with open('experiments_log.json', 'r') as file:
     experiments = json.loads(file.read())
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-engine = 'ada'
+engines = ['ada', 'babbage', 'curie', 'davinci']
+for engine in engines:
+    for experiment_name in experiments.keys():
+        if (f'output_test_raw_{engine}' in experiments[experiment_name].keys()
+            or 'output_test_raw' in experiments[experiment_name].keys()):
+            print(f"Have already performed {experiment_name} with this engine"
+                    " skipping it now.")
+            continue
 
-for experiment_name in experiments.keys():
-    if f'output_test_raw_{engine}' in experiments[experiment_name].keys():
-        print(f"Have already performed {experiment_name} with this engine"
-                " skipping it now.")
-        continue
-
-    print(f"Running experiment {experiment_name} with engine {engine}. . .")
-    
-    experiment = experiments[experiment_name]
-    experiment[f'response_{engine}'] = []
-    experiment[f'output_test_raw_{engine}'] = []
-    experiment[f'output_test_cleaned_{engine}'] = []
-    
-    for point in experiment['input_test']:
-        point = textify_numbers(point)
-        prompt_text = (
-            experiment['input_text']
-            + f'Input = {point}, output ='
-        )
+        print(f"Running experiment {experiment_name} with engine {engine}. . .")
         
-        response = openai.Completion.create(engine=engine,
-                        prompt=prompt_text, max_tokens=6,
-                        temperature=0, top_p=0)
-
-        experiment[f'response_{engine}'].append(response)
-
-        response_text = response['choices'][0]['text']
-        experiment[f'output_test_raw_{engine}'].append(response_text)
-
-        experiment[f'output_test_cleaned_{engine}'].append(
-            int(
-                re.findall('-?\d+',response_text
-                        )[0]
-                )
+        experiment = experiments[experiment_name]
+        experiment[f'response_{engine}'] = []
+        experiment[f'output_test_raw_{engine}'] = []
+        experiment[f'output_test_cleaned_{engine}'] = []
+        
+        for point in experiment['input_test']:
+            point = textify_numbers(point)
+            prompt_text = (
+                experiment['input_text']
+                + f'Input = {point}, output ='
             )
-            
-        experiments[experiment_name] = experiment
+            response = openai.Completion.create(engine=engine,
+                            prompt=prompt_text, max_tokens=6,
+                            temperature=0, top_p=0)
+
+            experiment[f'response_{engine}'].append(response)
+
+            response_text = response['choices'][0]['text']
+            experiment[f'output_test_raw_{engine}'].append(response_text)
+
+            experiment[f'output_test_cleaned_{engine}'].append(
+                int(
+                    re.findall('-?\d+',response_text
+                            )[0]
+                    )
+                )
+                
+            experiments[experiment_name] = experiment
 
 with open('experiments_log.json', 'w') as file:
     json.dump(experiments, file, indent=4)

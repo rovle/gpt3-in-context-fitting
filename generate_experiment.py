@@ -17,25 +17,27 @@ with open('experiments_log.json', 'r+') as file:
 
 if __name__=='__main__':
 
-    name = 'simple_linearly_separable_2d_classification'
+    name = f'2d_class_type_2_rstate_93'
     preamble = ""
     classes = [0, 1]
     def sampling_fn(class_num, size):
         if class_num == 0:
-            sample = multivariate_normal.rvs(mean=[50, 40],
-                                            cov=[[160, 0], [0, 80]], 
-                                            size=size)
+            sample = multivariate_normal.rvs(mean=[40, 50],
+                                            cov=[[80, 0], [0, 160]], 
+                                            size=size,
+                                            random_state=93)
             round_vec = np.vectorize(round)
             sample = round_vec(sample)
-            return [tuple(x) for x in sample]
+            return [x.tolist() for x in sample]
     
         if class_num == 1:
-            sample = multivariate_normal.rvs(mean=[50, 60],
-                                            cov=[[80, 0], [0, 160]],
-                                            size=size)
+            sample = multivariate_normal.rvs(mean=[60, 50],
+                                            cov=[[160, 0], [0, 80]],
+                                            size=size,
+                                            random_state=94)
             round_vec = np.vectorize(round)
             sample = round_vec(sample)
-            return [tuple(x) for x in sample]
+            return [x.tolist() for x in sample]
     
     generate_classification_experiment(
                                     experiments_dict=experiments,
