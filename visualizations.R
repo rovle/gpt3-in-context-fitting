@@ -18,9 +18,14 @@ ggplot(dat, aes(x=x, y=y, color=clas)) +
   facet_wrap(~ type, ncol=3) +
   scale_color_discrete(name="Class") +
   labs(title="", x="", y="") +
-    theme(legend.position = "none",
-          strip.background = element_rect(colour="purple",
-                                          fill="white"))
+  theme(legend.position = "none",
+        panel.border = element_rect(colour="#fe5185", size=0.8),
+          strip.background = element_rect(colour="blue",
+                                          fill="white", size=0.8),
+        axis.text.x=element_text(colour="#fe5185"),
+        axis.text.y=element_text(colour="#fe5185"),
+        axis.ticks = element_line(colour = '#fe5185', size = 0.8, linetype = 'dashed')
+        )
 
 dat2 <- read.csv('differences.csv',
                  header=TRUE,
