@@ -48,7 +48,7 @@ for engine in engines:
                     )
                 )
                 
-            experiments[experiment_name] = experiment
+        experiments[experiment_name] = experiment
 
 with open('experiments_log.json', 'w') as file:
     json.dump(experiments, file, indent=4)

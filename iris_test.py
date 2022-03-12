@@ -53,8 +53,9 @@ for engine in engines:
                         f'Input = {input}, output ='
                         )
         response = openai.Completion.create(engine=engine,
-                            prompt=input_text, max_tokens=4,
-                            temperature=0, top_p=0)
+                                            prompt=input_text,
+                                            max_tokens=4,
+                                            temperature=0, top_p=0)
         response_text = response['choices'][0]['text']
         results[engine]['gpt_output_raw'].append(response_text)
         results[engine]['gpt_classification'].append(

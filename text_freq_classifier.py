@@ -1,3 +1,11 @@
+"""
+In order to see how good GPT-3 classification is, this is a classifier based
+on  numbers' digits which I hacked in about 10 minutes. Note that, while
+seemingly only working on pattern matching digits, this classifier actually
+implicitly computes some (statistics of) distances as well.
+"""
+
+
 import json
 from collections import defaultdict
 from statistics import mean
@@ -9,8 +17,6 @@ rstates = ['42', '55', '93']
 with open('experiments_log.json', 'r') as file:
     experiments = json.loads(file.read())
 
-
-ukupno = 0
 
 accuracies2 = []
 for name in experiment_names:
