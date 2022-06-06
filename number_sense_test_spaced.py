@@ -1,10 +1,12 @@
 """
-To investigate whether there is any kind of "number sense" influencing
-GPT-3's classifications, versus just shallow patern matching on symbols,
+(Same as number_sense_test.py, but only the letters are spaced out in
+order to ameliorate encoding issues.)
+
+To test whether some kind of "number sense" influences GPT-3's
+classifications, versus just shallow patern matching on symbols,
 I map digits 0, ..., 9 in the feature vector to some
 random letters, and see how that affects classification accuracy.
 """
-from typing import Mapping
 from utils import textify_numbers
 import string
 import random
@@ -28,9 +30,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 #                    letters
 #                    )
 #                )
-# the above produces:
-mapping = {'0': 'd', '1': 'a', '2': 'j', '3': 'h', '4': 'w',
-             '5': 'c', '6': 'm', '7': 'b', '8': 'l', '9': 'x'}
+mapping = {'0': 'd ', '1': 'a ', '2': 'j ', '3': 'h ', '4': 'w ',
+             '5': 'c ', '6': 'm ', '7': 'b ', '8': 'l ', '9': 'x '}
 
 with open('experiments_log.json', 'r') as file:
     experiments = json.loads(file.read())
@@ -52,11 +53,11 @@ for name in experiment_names:
             initial_part = initial_part.replace(digit, mapping[digit])
         new_line = initial_part + line[-1] + '\n'
         modified_input_text += new_line
-
-    experiment['letters_input_text'] = modified_input_text
-    experiment[f'letters_response_{engine}'] = []
-    experiment[f'letters_output_test_raw_{engine}'] = []
-    experiment[f'letters_output_test_cleaned_{engine}'] = []
+    
+    experiment['spaced_letters_input_text'] = modified_input_text
+    experiment[f'spaced_letters_response_{engine}'] = []
+    experiment[f'spaced_letters_output_test_raw_{engine}'] = []
+    experiment[f'spaced_letters_output_test_cleaned_{engine}'] = []
 
     for point in experiment['input_test']:
         point = textify_numbers(point)
@@ -66,17 +67,17 @@ for name in experiment_names:
                 modified_input_text
                 + f'Input = {point}, output ='
             )
-
+    
         response = openai.Completion.create(engine=engine,
                 prompt=prompt_text, max_tokens=6,
                 temperature=0, top_p=0)
 
-        experiment[f'letters_response_{engine}'].append(response)
+        experiment[f'spaced_letters_response_{engine}'].append(response)
 
         response_text = response['choices'][0]['text']
-        experiment[f'letters_output_test_raw_{engine}'].append(response_text)
+        experiment[f'spaced_letters_output_test_raw_{engine}'].append(response_text)
 
-        experiment[f'letters_output_test_cleaned_{engine}'].append(
+        experiment[f'spaced_letters_output_test_cleaned_{engine}'].append(
                 int(
                     re.findall('-?\d+',response_text
                             )[0]

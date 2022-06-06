@@ -1,3 +1,13 @@
+"""
+A script which just calls generate_classification_experiment, in this case,
+and give it some parameters.
+
+Various other ways this could've been done, but this was the easiest one.
+I leave it here not because of its optimality, but just like, leaving
+a paper trail of how I did things, for transparency.
+"""
+
+
 import json
 from scipy.stats import norm, multivariate_normal
 import random
@@ -25,8 +35,18 @@ if __name__=='__main__':
         rstate = 240
         if class_num == 0:
             mixture1 = np.concatenate((
-                                        multivariate_normal.rvs([25, 25], [[var, 0], [0, var]], size=size, random_state=rstate),
-                                        multivariate_normal.rvs([75, 75], [[var, 0], [0, var]], size=size, random_state=rstate+1),
+                                        multivariate_normal.rvs(
+                                            [25, 25],
+                                            [[var, 0], [0, var]],
+                                            size=size,
+                                            random_state=rstate
+                                            ),
+                                        multivariate_normal.rvs(
+                                            [75, 75],
+                                            [[var, 0], [0, var]],
+                                            size=size,
+                                            random_state=rstate+1
+                                            ),
                                     ))
 
             indices = np.random.choice(mixture1.shape[0], 25, replace=False)
@@ -38,8 +58,18 @@ if __name__=='__main__':
     
         if class_num == 1:
             mixture2 = np.concatenate((
-                                        multivariate_normal.rvs([75, 25], [[var, 0], [0, var]], size=size, random_state=rstate+2),
-                                        multivariate_normal.rvs([25, 75], [[var, 0], [0, var]], size=size, random_state=rstate+3),
+                                        multivariate_normal.rvs(
+                                            [75, 25],
+                                            [[var, 0], [0, var]],
+                                            size=size,
+                                            random_state=rstate+2
+                                            ),
+                                        multivariate_normal.rvs(
+                                            [25, 75],
+                                            [[var, 0], [0, var]],
+                                            size=size,
+                                            random_state=rstate+3
+                                            ),
                                     ))
 
             indices = np.random.choice(mixture2.shape[0], 25, replace=False)

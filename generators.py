@@ -8,11 +8,14 @@ def generate_regression_experiment(experiments_dict, name, preamble,
     """
     Generate data for a regression experiment.
 
-    ----------
+    Takes a dictionary in which to store a regression experiment;
+    its name, preamble (text before the input vectors), regression
+    function, train and test set (just the "x"s, "y"s are generated
+    by the function).
 
-    Parameters:
-
-    
+    Note that I was calling this function with the full dictionary
+    of previous experiments as the first argument.
+    USING THIS FUNCTION IN A 'NAIVE' WAY MIGHT CAUSE LOSS OF DATA.
     """
     if name in experiments_dict.keys():
         raise Exception("An experiment with that name already exists!")
@@ -43,7 +46,16 @@ def generate_classification_experiment(experiments_dict, name, preamble,
                                         sampling_fn, num_train, num_test,
                                         classes):
     """
-    Supports only binary & balanced dataset classification.
+    Generate data for a classification experiment.
+
+    Takes a dictionary in which to store a classification
+    experiment; its name, preamble (text before the input
+    vectors), sampling function, number of samples in train
+    and test dataset, as well as a list of classes.
+
+    Note that I was calling this function with the full dictionary
+    of previous experiments as the first argument.
+    USING THIS FUNCTION IN A 'NAIVE' WAY MIGHT CAUSE LOSS OF DATA.
     """
     num_classes = len(classes)
     if (num_train % num_classes != 0) or (num_test % num_classes != 0):

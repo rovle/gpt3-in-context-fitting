@@ -2,8 +2,8 @@
 Just a small script which takes the usual classification task of 2d points,
 but replaces labels with 1 if the first coordinate is even, 0 otherwise.
 
-No models find to "spot the pattern" here (see classification_playground.ipynb),
-and so they have random classifier's accuracy, 50%.
+No models "spot the pattern" here (see classification_playground.ipynb),
+and so they have random classifier's accuracy, ~50%.
 """
 
 

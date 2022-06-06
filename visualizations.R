@@ -44,7 +44,7 @@ scale_y_continuous(labels = scales::percent) +
         legend.box.background = element_rect(colour = "purple", size=1),
         legend.margin=margin(t=-0.18,l=0.05,b=0.0,r=0.05, unit='cm'))
 
-ggsave('plots/razlike.jpg', width = 6, height = 6,
+ggsave('plots/razlike.png', width = 6, height = 6,
        dpi = 200, units = "in")
 
 reg1 <- read.csv('results/linear_model_1_input_15.csv',
@@ -66,7 +66,7 @@ ggplot(reg1, aes(x=x, y=y, color=from)) +
         axis.title.x=element_blank(),
         axis.title.y=element_blank())
 
-ggsave('plots/reg1.jpg', width = 6, height = 6,
+ggsave('plots/reg1.png', width = 6, height = 6,
        dpi = 200, units = "in")
 
 
@@ -90,7 +90,7 @@ ggplot(reg2, aes(x=x, y=y, color=from)) +
         axis.title.x=element_blank(),
         axis.title.y=element_blank())
 
-ggsave('plots/reg2.jpg', width = 6, height = 6,
+ggsave('plots/reg2.png', width = 6, height = 6,
        dpi = 200, units = "in")
 
 reg3 <- read.csv('results/quadratic_model_2_input_25_smaller_variance.csv',
@@ -113,7 +113,7 @@ ggplot(reg3, aes(x=x, y=y, color=from)) +
         axis.title.x=element_blank(),
         axis.title.y=element_blank())
 
-ggsave('plots/reg3.jpg', width = 6, height = 6,
+ggsave('plots/reg3.png', width = 6, height = 6,
        dpi = 200, units = "in")
 
 
@@ -138,5 +138,5 @@ ggplot(reg4, aes(x=x, y=y, color=from)) +
         axis.title.x=element_blank(),
         axis.title.y=element_blank())
 
-ggsave('plots/reg4.jpg', width = 6, height = 6,
+ggsave('plots/reg4.png', width = 6, height = 6,
        dpi = 200, units = "in")

@@ -1,3 +1,12 @@
+"""
+Loads the Iris sataset, transforms it, and then fits GPT-3-model on it.
+
+Takes a "name" argument since I did a few variations of this script,
+each saved as its own separate experiment.
+"""
+
+
+
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import numpy as np

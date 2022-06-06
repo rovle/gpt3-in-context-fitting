@@ -1,8 +1,11 @@
 """
-In order to see how good GPT-3 classification is, this is a classifier based
-on  numbers' digits which I hacked in about 10 minutes. Note that, while
-seemingly only working on pattern matching digits, this classifier actually
-implicitly computes some (statistics of) distances as well.
+In order to see how good GPT-3 classification is, this is a classifier which
+I though of in a few seconds, which classifies numbers by taking their first
+digit into consideration, and then doing statistics/voting based on it.
+
+Note that, while seemingly only working on pattern matching digits,
+this classifier actually implicitly computes some (statistics of)
+distances as well.
 """
 
 

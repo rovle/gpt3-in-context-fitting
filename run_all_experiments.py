@@ -1,3 +1,14 @@
+"""
+Just runs all the experiments in experiments_log.json which have
+not yet been run.
+
+Note: please uncomment the line which retrieves your OpenAI API key
+if you wish to send requests to OpenAI API. This script costs actual
+money if your experiments_log.json has any experiments which have not
+been run, and you have an API key saved on your system.
+"""
+
+
 import json
 import openai
 import re
@@ -8,7 +19,7 @@ import argparse
 with open('experiments_log.json', 'r') as file:
     experiments = json.loads(file.read())
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+#openai.api_key = os.getenv("OPENAI_API_KEY")
 
 engines = ['ada', 'babbage', 'curie', 'davinci']
 for engine in engines:
