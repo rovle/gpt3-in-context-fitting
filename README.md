@@ -1,6 +1,6 @@
 # GPT-3 In-context numerical model fitting experiments
 
-This is repository for my experiments of GPT-3's ability to fit numerical models in-context. See the associated [Lesswrong post](https://www.lesswrong.com/posts/c2RzFadrxkzyRAFXa/who-models-the-models-that-model-models-an-exploration-of).
+This is repository for my experiments on GPT-3's ability to fit numerical models in-context. See the associated [Lesswrong post](https://www.lesswrong.com/posts/c2RzFadrxkzyRAFXa/who-models-the-models-that-model-models-an-exploration-of).
 
 Short descriptions of files in this repository:
 
